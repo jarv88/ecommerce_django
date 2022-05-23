@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load l10n %}
+{% block title %}Shop - New Product{% endblock title %}
+
+{% block content %}
+
+<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <table>
+    <tr><th><label for="titulo">Title: </label></th><td><input type="text" name="title" id="title"></td></tr>
+ 
+    <tr><th><label for="description">Description: </label></th><td><textarea name="description" id="description" cols="30" rows="10"></textarea></td></tr>
+ 
+    <tr><th><label for="category">Category: </label></th><td>
+ 
+      <!-- <select name="category" id="category"> -->
+ 
+       {% for category in categories %}
+     
+      <!-- <option value="{{ category.name }}">{{ category.name }}</option> -->
+
+      <input type="checkbox" id="{{ category.name }}" name="{{ category.name }}" value="{{ category.name }}">
+      <label for="{{ category.name }}"> {{ category.name }}</label><br>
+
+       {% endfor %}
+ 
+       </select></td></tr>
+    
+     <tr><th><label for="image">Image: </label></th><td> <input type="file" id="image" name="image" accept="image/png, image/jpeg">  </td></tr>
+ 
+       <tr><th><label for="price">Price: </label></th><td><input type="text" name="price" id="price"> </td></tr>
+ 
+     <tr><th><input type="submit" value="Save"></th></tr>
+     </table>
+ 
+ 
+  </form>
+
+
+
+
+{% endblock content %}
