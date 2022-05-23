@@ -17,17 +17,27 @@ def newProduct(request):
     if request.method=="POST":
         if form.is_valid():
             image=form.cleaned_data['image']
+
+        if "checkbox" in request.POST:
+            categories=request.POST.getlist('checkbox')
         title=request.POST.get("title")
         description=request.POST.get("description")
-        category=request.POST.get("category")
+        #category=request.POST.get("category")
         #image=form.cleaned_data['image']
         price=request.POST.get("price")
-
+        
         new_product=Product(title=title,image=image,description=description,price=price)
 
         
         try:
             new_product.save()
+
+            for category in categories:
+                categ = CategoryProd.objects.get(name=category)
+                new_product.categories.add(categ)
+                #print(category)
+
+
             return redirect("/new_product/?valid")
         except:
             return redirect("/new_product/?error")

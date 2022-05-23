@@ -17,9 +17,9 @@
  
        {% for category in categories %}
      
-      <!-- <option value="{{ category.name }}">{{ category.name }}</option> -->
+      <!-- <option value="{{ category.name }}">{{ category.name }}</option>        agregar {} ->  % url 'datos:editar' prueba.id %        -->
 
-      <input type="checkbox" id="{{ category.name }}" name="{{ category.name }}" value="{{ category.name }}">
+      <input type="checkbox" id="{{ category.name }}" name="checkbox" value="{{ category.name }}">
       <label for="{{ category.name }}"> {{ category.name }}</label><br>
 
        {% endfor %}
