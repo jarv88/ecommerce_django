@@ -4,7 +4,8 @@ from .forms import ImageUploadForm
 
 # Create your views here.
 def index(request):
-    return render(request,"index.html",{ })
+    products= Product.objects.all()
+    return render(request,"index.html",{"products": products })
 
 def newProduct(request):
     category=CategoryProd.objects.all()
