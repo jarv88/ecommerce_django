@@ -20,14 +20,19 @@
      <td>{{ value.title }}</td>
      <td>{{ value.quantity }}</td>
      <td>${{ value.price }}</td>
-     <td><a href="">X</a></td>
+     <td><a href="{% url 'Tienda:DeductCart' value.product_id %}">X</a></td>
      </tr>    
     
 {% endfor %}
 
 </table>
 
-<a href="">Clean Cart</a>
+<a href="{% url 'Tienda:CleanCart' %}">Clean Cart</a>
 <span>{{total_cart}}</span>
 
+<script>
+    window.onload = function () {
+      setCart({{ lenCart }})
+    }
+  </script>
 {% endblock content %}

@@ -6,9 +6,14 @@ from .models import CategoryProd, Product
 from .forms import ImageUploadForm
 
 # Create your views here.
+
+
+
 def index(request):
     products= Product.objects.all()
-    return render(request,"index.html",{"products": products })
+    cart= request.session.get("cart")
+    lenCart = len(cart)
+    return render(request,"index.html",{"products": products, "lenCart": lenCart })
 
 def newProduct(request):
     category=CategoryProd.objects.all()
@@ -76,7 +81,7 @@ def deductCart(request, idProduct):
     cart=Cart(request)
     product= Product.objects.get(id=idProduct)
     cart.deductProduct(product=product)
-    return redirect("/")
+    return redirect("/cart")
 
 def listCart(request):
     cart= request.session.get("cart")
@@ -90,7 +95,7 @@ def listCart(request):
         totalCart= totalCart + (float(cart[key]['price']) * int(cart[key]['quantity']))
 
     #print(totalCart)
-    return render(request, "cart.html", {"cart": cart, "total_cart": totalCart})
+    return render(request, "cart.html", {"cart": cart, "total_cart": totalCart, "lenCart": len(cart)})
 
 def cleanCart(request):
     cart=Cart(request)

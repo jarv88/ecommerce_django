@@ -5,3 +5,14 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+function addCart(num) {
+     let numberCart = document.getElementById("spanCart").innerHTML
+     document.getElementById("spanCart").innerHTM=""
+     document.getElementById("spanCart").innerHTML= numberCart + num
+    
+}
+
+function setCart(num){
+    document.getElementById("spanCart").innerHTML=num
+}
+

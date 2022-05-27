@@ -10,5 +10,5 @@ urlpatterns = [
     path('cart/', listCart, name="Cart"),
     path('cart/clean', cleanCart, name="CleanCart"),
     path('addCart/<int:idProduct>', addCart, name="AddCart"),
-    path('cart/clean', cleanCart, name="CleanCart"),
+    path('cart/deduct/<int:idProduct>', deductCart, name="DeductCart"),
 ]
