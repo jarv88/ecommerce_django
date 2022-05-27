@@ -28,3 +28,4 @@ class Product(models.Model):
         verbose_name_plural="Products"
     def __str__(self):
         return self.title
+

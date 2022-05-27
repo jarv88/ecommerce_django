@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Shop - Cart{% endblock title %}
+
+
+{% block content %}
+
+<h1>Shopping Cart</h1>
+
+<table class="table">
+<tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Deduct</th>
+</tr>
+
+{% for id, value in cart.items %}
+     <tr>
+     <td>{{ value.title }}</td>
+     <td>{{ value.quantity }}</td>
+     <td>${{ value.price }}</td>
+     <td><a href="">X</a></td>
+     </tr>    
+    
+{% endfor %}
+
+</table>
+
+<a href="">Clean Cart</a>
+<span>{{total_cart}}</span>
+
+{% endblock content %}

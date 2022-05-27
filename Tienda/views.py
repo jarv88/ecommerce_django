@@ -1,4 +1,7 @@
+from itertools import product
 from django.shortcuts import redirect, render
+
+from .Cart import Cart
 from .models import CategoryProd, Product
 from .forms import ImageUploadForm
 
@@ -59,3 +62,38 @@ def newCategory(request):
 
 
     return render(request,"new_category.html",{ })
+
+
+
+def addCart(request, idProduct):
+    cart=Cart(request)
+    product= Product.objects.get(id=idProduct)
+    cart.add(product=product)
+
+    return redirect("/")
+
+def deductCart(request, idProduct):
+    cart=Cart(request)
+    product= Product.objects.get(id=idProduct)
+    cart.deductProduct(product=product)
+    return redirect("/")
+
+def listCart(request):
+    cart= request.session.get("cart")
+    #print(type(cart))
+    #print(cart)
+    totalCart=0
+    for key in cart:
+        #print(cart[key]['price'])
+
+
+        totalCart= totalCart + (float(cart[key]['price']) * int(cart[key]['quantity']))
+
+    #print(totalCart)
+    return render(request, "cart.html", {"cart": cart, "total_cart": totalCart})
+
+def cleanCart(request):
+    cart=Cart(request)
+    cart.cleanCart()
+    return redirect("/")
+    
