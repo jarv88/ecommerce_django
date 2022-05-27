@@ -45,6 +45,16 @@
                         </li>
                         <!-- Fin New dropdown    -->
                     </ul>
+                    <form id="searchForm" class="form-check-inline" action="" method="POST"> {% csrf_token %}
+                        <input type="text" name="search" placeholder="search...">
+                        
+            
+                        <a href="{% url 'Tienda:Cart' %}">
+                        <button type="submit" class="btn btn-outline-dark">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        </a>
+                    </form>
                     
                         <a href="{% url 'Tienda:Cart' %}">
                         <button class="btn btn-outline-dark" type="submit">
