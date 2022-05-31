@@ -3,8 +3,10 @@ from django.shortcuts import redirect, render
 
 from .Cart import Cart
 from .models import CategoryProd, Product
-from .forms import ImageUploadForm
-
+from .forms import ImageUploadForm, RegisterForm
+from django.contrib.auth.decorators import login_required, permission_required
+from django.conf import settings
+from django.contrib.auth import logout
 # Create your views here.
 
 
@@ -12,7 +14,7 @@ from .forms import ImageUploadForm
 def index(request):
     products= Product.objects.all()
     cart= request.session.get("cart")
-    lenCart = len(cart)
+    lenCart = 0 if cart is None else len(cart)
     return render(request,"index.html",{"products": products, "lenCart": lenCart })
 
 def newProduct(request):
@@ -69,20 +71,20 @@ def newCategory(request):
     return render(request,"new_category.html",{ })
 
 
-
+@login_required
 def addCart(request, idProduct):
     cart=Cart(request)
     product= Product.objects.get(id=idProduct)
     cart.add(product=product)
 
     return redirect("/")
-
+@login_required
 def deductCart(request, idProduct):
     cart=Cart(request)
     product= Product.objects.get(id=idProduct)
     cart.deductProduct(product=product)
     return redirect("/cart")
-
+@login_required
 def listCart(request):
     cart= request.session.get("cart")
     #print(type(cart))
@@ -96,9 +98,33 @@ def listCart(request):
 
     #print(totalCart)
     return render(request, "cart.html", {"cart": cart, "total_cart": totalCart, "lenCart": len(cart)})
-
+@login_required
 def cleanCart(request):
     cart=Cart(request)
     cart.cleanCart()
     return redirect("/")
     
+##############################################
+######Vistas para registro y logout###########
+##############################################
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+
+            try:
+                form.save()    
+                return redirect("/accounts/login/?valid") 
+            except:
+                return redirect("/accounts/login/?error")     
+            #return HttpResponseRedirect(reverse('login'))
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/register.html', {
+        'form': form
+        })
+
+def logout(request):
+    logout(request)
+    return redirect("/accounts/login/")

@@ -8,7 +8,7 @@
 function addCart(num) {
      let numberCart = document.getElementById("spanCart").innerHTML
      document.getElementById("spanCart").innerHTM=""
-     document.getElementById("spanCart").innerHTML= numberCart + num
+     document.getElementById("spanCart").innerHTML= parseint(numberCart) + num
     
 }
 

@@ -1,0 +1,53 @@
+{% extends "registration/layout.html" %}
+
+{% block content %}
+
+{% if "valido" in request.GET %}
+        <p>Successfully created</p>
+    
+    {% endif %}
+
+    {% if "error" in request.GET %}
+        <p>An error has ocurred</p>
+    
+    {% endif %}
+
+
+
+{% if form.errors %}
+<p>User and password dont match, please retry again</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account does not have access to this page. Please login with a full access account.</p>
+    {% else %}
+    <p>Login first.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div>
+  <td>User</td>
+  <td>{{ form.username }}</td>
+</div>
+<div>
+  <td>{{ form.password.label_tag }}</td>
+  <td>{{ form.password }}</td>
+</div>
+
+<div>
+  <input type="submit" value="LOGIN" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+
+{# Asume que configuras la vista password_reset en tu URLconf #}
+
+<p><a href="{% url 'password_reset' %}">¿Forgot your password?</a></p>
+{# <p>{{ next }}</p> #}
+<p><a href="{% url 'Tienda:Register' %}">Register</a></p>
+
+{% endblock %}
