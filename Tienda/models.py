@@ -49,3 +49,19 @@ class Sale(models.Model):
         return f"{self.idSale} - {self.name} ({self.code})"
 
 
+class SaleItem(models.Model):
+    idSale= models.ForeignKey(Sale, on_delete=models.CASCADE)#models.IntegerField()
+    codeProduct=models.CharField(max_length=50)#models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity=models.IntegerField()
+    price=models.FloatField()
+    total=models.FloatField() #price x quantity
+    date_created = models.DateTimeField("Date created", auto_now_add=True)
+    date_updated = models.DateTimeField("Date updated", auto_now=True)
+
+    class Meta:
+        verbose_name="SaleItem"
+        verbose_name_plural="SaleItems"
+    def __str__(self):
+        return f"{self.idSale} - {self.codeProduct} ({self.total})"
+
+
