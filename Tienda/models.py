@@ -29,10 +29,10 @@ class Product(models.Model):
         verbose_name="Product"
         verbose_name_plural="Products"
     def __str__(self):
-        return self.title
+        return f"{self.code}-{self.title}"
 
 class Sale(models.Model):
-    idSale= models.PositiveIntegerField()
+    idSale= models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True,verbose_name="User")
     shippingAddress = models.TextField("Shipping address", blank=True)
     billingAddress = models.TextField("Billing address", blank=True)
@@ -46,15 +46,15 @@ class Sale(models.Model):
         verbose_name="Sale"
         verbose_name_plural="Sales"
     def __str__(self):
-        return f"{self.idSale} - {self.name} ({self.code})"
+        return f"{self.idSale} - {self.user.username} ({self.total})"
 
 
 class SaleItem(models.Model):
     idSale= models.ForeignKey(Sale, on_delete=models.CASCADE)#models.IntegerField()
-    codeProduct=models.CharField(max_length=50)#models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity=models.IntegerField()
-    price=models.FloatField()
-    total=models.FloatField() #price x quantity
+    codeProduct=models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity=models.IntegerField(default=0.00)
+    price=models.FloatField(default=0.00)
+    total=models.FloatField(default=0.00) #price x quantity
     date_created = models.DateTimeField("Date created", auto_now_add=True)
     date_updated = models.DateTimeField("Date updated", auto_now=True)
 

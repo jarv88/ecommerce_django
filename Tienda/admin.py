@@ -7,15 +7,15 @@ class CategoryProdAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     #readonly_fields=("created","updated")
-    list_display=("title",'price',)
+    list_display=("code","title",'price',)
 
 class SaleAdmin(admin.ModelAdmin):
     #readonly_fields=("created","updated")
-    list_display=("idSale",'user',)
+    list_display=('user',)
 
 class SaleItemAdmin(admin.ModelAdmin):
     #readonly_fields=("created","updated")
-    list_display=("idSale",'codeProduct',)
+    list_display=("idSale",'codeProduct','quantity','price','total')
 
 
 admin.site.register(CategoryProd,CategoryProdAdmin)

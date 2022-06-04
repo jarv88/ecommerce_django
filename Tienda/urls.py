@@ -11,7 +11,7 @@ urlpatterns = [
     path('cart/clean', cleanCart, name="CleanCart"),
     path('addCart/<int:idProduct>', addCart, name="AddCart"),
     path('cart/deduct/<int:idProduct>', deductCart, name="DeductCart"),
-
+    path('cart/sale', sale, name="Sale"),
     path('registration/', register, name="Register"),
     path('logout/', logout, name="Logout"),
 

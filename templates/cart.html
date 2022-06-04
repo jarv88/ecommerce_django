@@ -17,6 +17,7 @@
 
 {% for id, value in cart.items %}
      <tr>
+     <td>{{ value.code }}</td>
      <td>{{ value.title }}</td>
      <td>{{ value.quantity }}</td>
      <td>${{ value.price }}</td>
@@ -29,6 +30,13 @@
 
 <a href="{% url 'Tienda:CleanCart' %}">Clean Cart</a>
 <span>{{total_cart}}</span>
+
+<form method="post" action="sale">
+  {% csrf_token %}
+
+    <input type="submit" value="Close sale" />
+
+  </form>
 
 <script>
     window.onload = function () {
