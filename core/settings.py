@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'ecommerce',
-        # 'USER': config('POSTGRES'),
-        # 'PASSWORD': config('PASSWORD_PG'),
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecommerce_django',
+        'USER': config('POSTGRES'),
+        'PASSWORD': config('PASSWORD_PG'),
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -130,3 +130,6 @@ STATIC_URL = '/static/'
 #CONFIGURACION PARA GUARDAR IMAGENES (UPLOAD_TO EN MODELS)
 MEDIA_URL= '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Redirigir a la URL de inicio después de iniciar sesión (Default redirecciona a /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'

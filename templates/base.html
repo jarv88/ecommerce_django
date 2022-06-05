@@ -56,13 +56,32 @@
                         </a>
                     </form>
                     
-                        <a href="{% url 'Tienda:Cart' %}">
+                    {% if request.user.is_authenticated %}
+                    <span class="mx-2"> Hi {{user.username}} </span>
+                    <a class="mx-2" href="{% url 'Tienda:Cart' %}">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span id="spanCart" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                         </a>
+                    <a href="{% url 'logout' %}">Logout</a>
+            
+            
+
+                    {% else %}
+
+
+        
+                        <a class="mx-2" href="{% url 'login' %}">Login</a> 
+                        <a class="mx-1" href="{% url 'Tienda:Register' %}">Register</a> 
+                            
+                    
+                    {% endif%}
+
+
+
+                        
                     
                 </div>
             </div>

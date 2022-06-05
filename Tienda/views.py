@@ -173,4 +173,6 @@ def sale(request):
             DetSale.price=float(cart[key]['price'])
             DetSale.total=DetSale.quantity * DetSale.price
             DetSale.save()
+        ccart= Cart(request)
+        ccart.cleanCart()
         return redirect("/")
